@@ -1,0 +1,6 @@
+module Pods_MilkQR {
+  umbrella header "Pods-MilkQR-umbrella.h"
+
+  export *
+  module * { export * }
+}

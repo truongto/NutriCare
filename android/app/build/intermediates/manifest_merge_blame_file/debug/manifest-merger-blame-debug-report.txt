@@ -1,0 +1,109 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.milkqr"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="21"
+9        android:targetSdkVersion="31" />
+10
+11    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+11-->/Users/truongto/Documents/ProductReact-Native/MilkQR/android/app/src/debug/AndroidManifest.xml:5:5-77
+11-->/Users/truongto/Documents/ProductReact-Native/MilkQR/android/app/src/debug/AndroidManifest.xml:5:22-75
+12    <uses-permission android:name="android.permission.INTERNET" />
+12-->/Users/truongto/Documents/ProductReact-Native/MilkQR/android/app/src/main/AndroidManifest.xml:4:5-67
+12-->/Users/truongto/Documents/ProductReact-Native/MilkQR/android/app/src/main/AndroidManifest.xml:4:22-64
+13    <uses-permission android:name="android.permission.CAMERA" />
+13-->/Users/truongto/Documents/ProductReact-Native/MilkQR/android/app/src/main/AndroidManifest.xml:5:5-65
+13-->/Users/truongto/Documents/ProductReact-Native/MilkQR/android/app/src/main/AndroidManifest.xml:5:22-62
+14    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+14-->[com.facebook.flipper:flipper:0.125.0] /Users/truongto/.gradle/caches/transforms-3/b2ec3232205e095c09543a31d56ae642/transformed/jetified-flipper-0.125.0/AndroidManifest.xml:16:5-76
+14-->[com.facebook.flipper:flipper:0.125.0] /Users/truongto/.gradle/caches/transforms-3/b2ec3232205e095c09543a31d56ae642/transformed/jetified-flipper-0.125.0/AndroidManifest.xml:16:22-73
+15
+16    <queries>
+16-->[androidx.camera:camera-extensions:1.1.0-beta02] /Users/truongto/.gradle/caches/transforms-3/d9dd362d51b0ca048471af26673d998a/transformed/jetified-camera-extensions-1.1.0-beta02/AndroidManifest.xml:24:5-28:15
+17        <intent>
+17-->[androidx.camera:camera-extensions:1.1.0-beta02] /Users/truongto/.gradle/caches/transforms-3/d9dd362d51b0ca048471af26673d998a/transformed/jetified-camera-extensions-1.1.0-beta02/AndroidManifest.xml:25:9-27:18
+18            <action android:name="androidx.camera.extensions.action.VENDOR_ACTION" />
+18-->[androidx.camera:camera-extensions:1.1.0-beta02] /Users/truongto/.gradle/caches/transforms-3/d9dd362d51b0ca048471af26673d998a/transformed/jetified-camera-extensions-1.1.0-beta02/AndroidManifest.xml:26:13-86
+18-->[androidx.camera:camera-extensions:1.1.0-beta02] /Users/truongto/.gradle/caches/transforms-3/d9dd362d51b0ca048471af26673d998a/transformed/jetified-camera-extensions-1.1.0-beta02/AndroidManifest.xml:26:21-83
+19        </intent>
+20    </queries>
+21
+22    <application
+22-->/Users/truongto/Documents/ProductReact-Native/MilkQR/android/app/src/main/AndroidManifest.xml:7:5-26:19
+23        android:name="com.milkqr.MainApplication"
+23-->/Users/truongto/Documents/ProductReact-Native/MilkQR/android/app/src/main/AndroidManifest.xml:8:7-38
+24        android:allowBackup="false"
+24-->/Users/truongto/Documents/ProductReact-Native/MilkQR/android/app/src/main/AndroidManifest.xml:12:7-34
+25        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+25-->[androidx.core:core:1.6.0] /Users/truongto/.gradle/caches/transforms-3/5c61d7afbc1bcd99cb491da6ba2ee6c1/transformed/core-1.6.0/AndroidManifest.xml:24:18-86
+26        android:debuggable="true"
+27        android:icon="@mipmap/ic_launcher"
+27-->/Users/truongto/Documents/ProductReact-Native/MilkQR/android/app/src/main/AndroidManifest.xml:10:7-41
+28        android:label="@string/app_name"
+28-->/Users/truongto/Documents/ProductReact-Native/MilkQR/android/app/src/main/AndroidManifest.xml:9:7-39
+29        android:roundIcon="@mipmap/ic_launcher_round"
+29-->/Users/truongto/Documents/ProductReact-Native/MilkQR/android/app/src/main/AndroidManifest.xml:11:7-52
+30        android:theme="@style/AppTheme"
+30-->/Users/truongto/Documents/ProductReact-Native/MilkQR/android/app/src/main/AndroidManifest.xml:13:7-38
+31        android:usesCleartextTraffic="true" >
+31-->/Users/truongto/Documents/ProductReact-Native/MilkQR/android/app/src/debug/AndroidManifest.xml:8:9-44
+32        <activity
+32-->/Users/truongto/Documents/ProductReact-Native/MilkQR/android/app/src/debug/AndroidManifest.xml:11:9-111
+33            android:name="com.facebook.react.devsupport.DevSettingsActivity"
+33-->/Users/truongto/Documents/ProductReact-Native/MilkQR/android/app/src/debug/AndroidManifest.xml:11:19-83
+34            android:exported="false" />
+34-->/Users/truongto/Documents/ProductReact-Native/MilkQR/android/app/src/debug/AndroidManifest.xml:11:84-108
+35        <activity
+35-->/Users/truongto/Documents/ProductReact-Native/MilkQR/android/app/src/main/AndroidManifest.xml:14:7-25:18
+36            android:name="com.milkqr.MainActivity"
+36-->/Users/truongto/Documents/ProductReact-Native/MilkQR/android/app/src/main/AndroidManifest.xml:15:9-37
+37            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|uiMode"
+37-->/Users/truongto/Documents/ProductReact-Native/MilkQR/android/app/src/main/AndroidManifest.xml:17:9-118
+38            android:exported="true"
+38-->/Users/truongto/Documents/ProductReact-Native/MilkQR/android/app/src/main/AndroidManifest.xml:20:9-32
+39            android:label="@string/app_name"
+39-->/Users/truongto/Documents/ProductReact-Native/MilkQR/android/app/src/main/AndroidManifest.xml:16:9-41
+40            android:launchMode="singleTask"
+40-->/Users/truongto/Documents/ProductReact-Native/MilkQR/android/app/src/main/AndroidManifest.xml:18:9-40
+41            android:windowSoftInputMode="adjustResize" >
+41-->/Users/truongto/Documents/ProductReact-Native/MilkQR/android/app/src/main/AndroidManifest.xml:19:9-51
+42            <intent-filter>
+42-->/Users/truongto/Documents/ProductReact-Native/MilkQR/android/app/src/main/AndroidManifest.xml:21:9-24:25
+43                <action android:name="android.intent.action.MAIN" />
+43-->/Users/truongto/Documents/ProductReact-Native/MilkQR/android/app/src/main/AndroidManifest.xml:22:13-65
+43-->/Users/truongto/Documents/ProductReact-Native/MilkQR/android/app/src/main/AndroidManifest.xml:22:21-62
+44
+45                <category android:name="android.intent.category.LAUNCHER" />
+45-->/Users/truongto/Documents/ProductReact-Native/MilkQR/android/app/src/main/AndroidManifest.xml:23:13-73
+45-->/Users/truongto/Documents/ProductReact-Native/MilkQR/android/app/src/main/AndroidManifest.xml:23:23-70
+46            </intent-filter>
+47        </activity>
+48
+49        <uses-library
+49-->[androidx.camera:camera-extensions:1.1.0-beta02] /Users/truongto/.gradle/caches/transforms-3/d9dd362d51b0ca048471af26673d998a/transformed/jetified-camera-extensions-1.1.0-beta02/AndroidManifest.xml:31:9-33:40
+50            android:name="androidx.camera.extensions.impl"
+50-->[androidx.camera:camera-extensions:1.1.0-beta02] /Users/truongto/.gradle/caches/transforms-3/d9dd362d51b0ca048471af26673d998a/transformed/jetified-camera-extensions-1.1.0-beta02/AndroidManifest.xml:32:13-59
+51            android:required="false" />
+51-->[androidx.camera:camera-extensions:1.1.0-beta02] /Users/truongto/.gradle/caches/transforms-3/d9dd362d51b0ca048471af26673d998a/transformed/jetified-camera-extensions-1.1.0-beta02/AndroidManifest.xml:33:13-37
+52
+53        <service
+53-->[androidx.camera:camera-camera2:1.1.0-beta02] /Users/truongto/.gradle/caches/transforms-3/e97f8bca88982767f792be17a052b913/transformed/jetified-camera-camera2-1.1.0-beta02/AndroidManifest.xml:26:9-35:19
+54            android:name="androidx.camera.core.impl.MetadataHolderService"
+54-->[androidx.camera:camera-camera2:1.1.0-beta02] /Users/truongto/.gradle/caches/transforms-3/e97f8bca88982767f792be17a052b913/transformed/jetified-camera-camera2-1.1.0-beta02/AndroidManifest.xml:27:13-75
+55            android:enabled="false"
+55-->[androidx.camera:camera-camera2:1.1.0-beta02] /Users/truongto/.gradle/caches/transforms-3/e97f8bca88982767f792be17a052b913/transformed/jetified-camera-camera2-1.1.0-beta02/AndroidManifest.xml:28:13-36
+56            android:exported="false" >
+56-->[androidx.camera:camera-camera2:1.1.0-beta02] /Users/truongto/.gradle/caches/transforms-3/e97f8bca88982767f792be17a052b913/transformed/jetified-camera-camera2-1.1.0-beta02/AndroidManifest.xml:29:13-37
+57            <meta-data
+57-->[androidx.camera:camera-camera2:1.1.0-beta02] /Users/truongto/.gradle/caches/transforms-3/e97f8bca88982767f792be17a052b913/transformed/jetified-camera-camera2-1.1.0-beta02/AndroidManifest.xml:32:13-34:89
+58                android:name="androidx.camera.core.impl.MetadataHolderService.DEFAULT_CONFIG_PROVIDER"
+58-->[androidx.camera:camera-camera2:1.1.0-beta02] /Users/truongto/.gradle/caches/transforms-3/e97f8bca88982767f792be17a052b913/transformed/jetified-camera-camera2-1.1.0-beta02/AndroidManifest.xml:33:17-103
+59                android:value="androidx.camera.camera2.Camera2Config$DefaultProvider" />
+59-->[androidx.camera:camera-camera2:1.1.0-beta02] /Users/truongto/.gradle/caches/transforms-3/e97f8bca88982767f792be17a052b913/transformed/jetified-camera-camera2-1.1.0-beta02/AndroidManifest.xml:34:17-86
+60        </service>
+61    </application>
+62
+63</manifest>
