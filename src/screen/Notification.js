@@ -79,21 +79,22 @@ const Notification=({navigation})=>{
 export default Notification;
 
 const styles = StyleSheet.create({
-  toolBar: {
+toolBar: {
     height: 70,
     flexDirection: 'row',
-    backgroundColor: '#3399FF',
+    backgroundColor: COLORS.bgTheme,
 },
 
 
 textToolbar: {
-    textAlign: 'center',
-    fontSize: 16,
+    // textAlign: 'center',
+    fontSize: 17,
     color: 'white',
     flex: 1,
     marginTop: 15,
     alignSelf: 'center',
-    fontWeight: 'bold'
+    fontWeight: '800',
+    marginLeft:'5%',
 },
 
 textphone:{

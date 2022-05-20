@@ -72,15 +72,23 @@ const Home=({navigation})=>{
     source={images.BGHome} 
     style={{flex: 1,backgroundColor:'#ffff'}}>
       <ScrollView>
+        
+        <View style={{flexDirection: 'row'}}>
           <View style={styles.logoView} >
                 <Image source={images.logoHome} style={styles.logo} />
           </View>
+
+          <TouchableOpacity style={{ marginLeft:10, marginTop:30, flex:1}}  onPress={() => {}}>
+          <Feather name="bell" color="#ffff" size={27} />
+          </TouchableOpacity>
+        </View>
 
         <Swiper
           // autoplay
           horizontal={true}
           height={225}
           // activeDotColor="#FF6347"
+          style={{marginTop:20}}
           >
           <View style={styles.flatListStype}>
             <View style={{flexDirection: 'row'}}>
@@ -92,7 +100,7 @@ const Home=({navigation})=>{
 
               <TouchableOpacity
                 onPress={() => {
-                  console.log('ok');
+                  navigation.navigate('MemberUser')
                 }}
                 style={{
                   flex: 1,
@@ -122,7 +130,7 @@ const Home=({navigation})=>{
 
               <TouchableOpacity
                 onPress={() => {
-                  console.log('ok');
+                  navigation.navigate('MemberUser')
                 }}
                 style={{
                   flex: 1,
@@ -374,18 +382,18 @@ const Home=({navigation})=>{
                   marginRight:8,
                 }}>
 
-                <View style={{width: '45%', flexDirection: 'row',alignItems: 'center',}}>
+                <View style={{width: '40%', flexDirection: 'row',alignItems: 'center',}}>
                   <Text style={{fontSize: 11,fontWeight: 'bold',}}>Xu:</Text>
                   <Text style={{fontSize: 14,fontWeight: '800',marginLeft:3,color: COLORS.textCOLORS}}>20</Text>
                   <Image source={images.coin} style={{ width: 20, height: 20, marginLeft:2}}></Image>
                 </View>
                 <View
                   style={{
-                    width: '55%',
+                    width: '50%',
                     backgroundColor:'#CCFFFF',
                     borderRadius:13,
                     alignItems: 'center',
-                    marginLeft: 2
+                    marginLeft: 8
                   }}>
                   <Text style={{fontSize: 9,color: '#336699',marginBottom:3,marginTop:3,marginLeft:2,marginRight:2}}>Còn hàng 1479</Text>
                 </View>
@@ -463,18 +471,18 @@ const Home=({navigation})=>{
                   marginRight:8,
                 }}>
 
-                <View style={{width: '45%', flexDirection: 'row',alignItems: 'center',}}>
+                <View style={{width: '40%', flexDirection: 'row',alignItems: 'center',}}>
                   <Text style={{fontSize: 11,fontWeight: 'bold',}}>Xu:</Text>
                   <Text style={{fontSize: 14,fontWeight: '800',marginLeft:3,color: COLORS.textCOLORS}}>20</Text>
                   <Image source={images.coin} style={{ width: 20, height: 20, marginLeft:2}}></Image>
                 </View>
                 <View
                   style={{
-                    width: '55%',
+                    width: '50%',
                     backgroundColor:'#CCFFFF',
                     borderRadius:13,
                     alignItems: 'center',
-                    marginLeft: 2
+                    marginLeft: 8
                   }}>
                   <Text style={{fontSize: 9,color: '#336699',marginBottom:3,marginTop:3,marginLeft:2,marginRight:2}}>Còn hàng 1479</Text>
                 </View>
@@ -615,17 +623,18 @@ const styles = StyleSheet.create({
     elevation: 4,
   },
   logoView: {
-    width: '30%',
+    // width: '30%',
     height: 40,
     marginLeft:10,
-    marginTop:30
+    marginTop:20,
+    flex:6
   },
   logo: {
     position: 'relative',
     // width: '90%',
     width: 100,
-    height: 40,
+    height: 60,
     resizeMode: 'contain',
-    alignSelf: 'center',
+    // alignSelf: 'center',
   },
 });

@@ -65,7 +65,6 @@ const RequestGET = async (url, token, callback) => {
         .then((response) => response.json())
         .then((responseJson) => {
             console.log("response: ", responseJson)
-
             callback(null, responseJson);
         })
         .catch((error) => {

@@ -10,9 +10,7 @@ import { Colors } from "react-native/Libraries/NewAppScreen";
 const GiftExchangeDetail=({navigation})=>{  
   return (
     <View style={{flex: 1, backgroundColor: '#ffff'}}>
-    {/* <View style={styles.toolBar}>
-      <Text style={styles.textToolbar}>Đổi điểm tích lũy</Text>
-    </View> */}
+  
       <ScrollView style={{marginBottom:10}}>
        <View style={{
             width: DEVICE_WIDTH,
@@ -139,30 +137,15 @@ const styles = StyleSheet.create({
   loginButtonText: {
     color: '#fff',
     alignSelf: 'center',
-    fontSize: 14,
+    fontSize: 17,
     marginLeft:10,
-    fontWeight:'800'
+    fontWeight:'700'
   },
   loginButtonTextV2: {
     color: COLORS.button,
     alignSelf: 'center',
-    fontWeight: '800',
-    fontSize: 14,
+    fontWeight: '700',
+    fontSize: 17,
     marginLeft:10
-  },
-  toolBar: {
-    height: 70,
-    flexDirection: 'row',
-    backgroundColor: '#3399FF',
-  },
-
-  textToolbar: {
-    textAlign: 'center',
-    fontSize: 16,
-    color: 'white',
-    flex: 1,
-    marginTop: 15,
-    alignSelf: 'center',
-    fontWeight: 'bold',
   },
 });

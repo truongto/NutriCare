@@ -7,6 +7,7 @@ import * as Animatable from "react-native-animatable";
 import Icon from "react-native-vector-icons/Ionicons";
 const SCREEN_HEIGHT = Dimensions.get("window").height;
 const SCREEN_WIDTH = Dimensions.get("window").width;
+import { COLORS, images } from '../components/constants';
 //https://github.com/moaazsidat/react-native-qrcode-scanner/issues/115
 
 const CheckQR=({navigation})=>{  
@@ -176,19 +177,21 @@ const styles = StyleSheet.create({
     height: scanBarHeight,
     backgroundColor: scanBarColor,
   },
+ 
   toolBar: {
     height: 70,
     flexDirection: 'row',
-    backgroundColor: '#3399FF',
-  },
+    backgroundColor: COLORS.bgTheme,
+ },
 
-  textToolbar: {
-    textAlign: 'center',
-    fontSize: 16,
+textToolbar: {
+    // textAlign: 'center',
+    fontSize: 17,
     color: 'white',
     flex: 1,
     marginTop: 15,
     alignSelf: 'center',
-    fontWeight: 'bold',
-  },
+    fontWeight: '800',
+    marginLeft:'5%',
+},
 });

@@ -160,17 +160,17 @@ const styles = StyleSheet.create({
 toolBar: {
   height: 70,
   flexDirection: 'row',
-  backgroundColor: '#3399FF',
+  backgroundColor: COLORS.bgTheme,
 },
 
 textToolbar: {
-  textAlign: 'center',
-  fontSize: 16,
-  color: 'white',
-  flex: 1,
-  marginTop: 15,
-  alignSelf: 'center',
-  fontWeight: 'bold',
+    fontSize: 17,
+    color: 'white',
+    flex: 1,
+    marginTop: 15,
+    alignSelf: 'center',
+    fontWeight: '800',
+    marginLeft:'5%',
 },
 userInfoSectionv2: {
     paddingHorizontal: 20,

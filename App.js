@@ -22,6 +22,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer } from '@react-navigation/native';
 import HomeApp from "./src/HomeApp";
 import Login from "./src/Login";
+import MemberUser from "./src/screen/MemberUser";
 const Stack = createNativeStackNavigator();
 
 const App = () => {
@@ -33,6 +34,7 @@ const App = () => {
       <Stack.Navigator>
         <Stack.Screen name="Login" component={Login} options={{ headerShown: false }}/>
         <Stack.Screen name="HomeApp"  component={HomeApp} options={{ headerShown: false , gestureEnabled: false,}}/>
+        <Stack.Screen name="MemberUser"  component={MemberUser} options={{ headerShown: false , gestureEnabled: false,}}/>
     </Stack.Navigator>
    </NavigationContainer>
   );

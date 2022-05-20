@@ -24,7 +24,9 @@ export const COLORS = {
     lightBlue: "#424BAF",
     darkGreen: "#213432",
     lightGreen: "#31Ad66",
+
     textCOLORS: "#336699",
+    bgTheme: "#034ea2",
 };
 
 export const SIZES = {
