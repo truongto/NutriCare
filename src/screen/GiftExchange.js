@@ -7,7 +7,7 @@ import Foundation from 'react-native-vector-icons/Foundation';
 import AppContent from '../appContent/AppContent'
 import * as AppApi from '../networking';
 import * as Progress from "react-native-progress";
-
+import Loader from '../components/Loader';
 const DEVICE_WIDTH = Dimensions.get('window').width;
 
 
@@ -47,6 +47,7 @@ const GiftExchange=({navigation})=>{
     
     const willFocusSubscription = navigation.addListener('focus', () => {
       getTitleList();
+      getListItems3(3);
     });
     return willFocusSubscription;
 
@@ -76,7 +77,7 @@ const GiftExchange=({navigation})=>{
   }
 
   const getListItems1 = (data2) => {
-    var urlList = AppContent.URL_List_Items + 'cateId=' + String(data2[0].Id)
+    var urlList = AppContent.URL_List_Items + 'cateId=' + String(data2[0].Id) + '&top=4'
     var URL = AppContent.BASE_URL + urlList
       AppApi.RequestGET(URL, AppContent.Token, (err, json) => {
         if(!err){
@@ -96,14 +97,13 @@ const GiftExchange=({navigation})=>{
   }
 
   const getListItems2 = (data3) => {
-    var urlList = AppContent.URL_List_Items + 'cateId=' + String(data3[1].Id)
+    var urlList = AppContent.URL_List_Items + 'cateId=' + String(data3[1].Id) + '&top=4'
     var URL = AppContent.BASE_URL + urlList
       AppApi.RequestGET(URL, AppContent.Token, (err, json) => {
         if(!err){
             if(json.status == 1){
               setDataItems2(json.ListGift)
-              console.log("setDataItems2",json)
-              getListItems3(data3);
+              setShowProcess(false)
             }else{
               setShowProcess(false)
               Alert.alert('Thông báo', String(json.Mess))
@@ -117,7 +117,7 @@ const GiftExchange=({navigation})=>{
 
 
   const getListItems3 = (data4) => {
-    var urlList = AppContent.URL_List_Items + 'cateId=' + String(data4[1].Id)
+    var urlList = AppContent.URL_List_Items + 'cateId=' + data4 + '&top=4'
     var URL = AppContent.BASE_URL + urlList
     
       AppApi.RequestGET(URL, AppContent.Token, (err, json) => {
@@ -166,7 +166,7 @@ const GiftExchange=({navigation})=>{
 
   return (
     <View style={{flex: 1}}>
-
+       <Loader visible={showProcess}></Loader>
       <ScrollView>
         <View style={styles.toolBar}>
           <Text style={styles.textToolbar}>Đổi xu nhận ưu đãi</Text>
@@ -206,11 +206,22 @@ const GiftExchange=({navigation})=>{
 
         
       <View style={{backgroundColor:'#ffff'}}>  
+
+      <View style={{flexDirection:'row'}}>
       {
         dataTitle.length > 0?
         <Text style={styles.textTile}>{dataTitle[0].Name}</Text>
         :<Text style={styles.textTile}></Text>
       }
+
+      <TouchableOpacity style={{backgroundColor: 'rgba(32, 194, 255, 0.6)', alignSelf:'center', marginRight:14, borderRadius:8}}
+        onPress={() => navigation.navigate('ListGiftExchangeDetail', {
+          idGift: dataTitle[0].Id
+        })}
+      >
+      <Text style={{fontSize:12,color:'#fff', margin:3}}>Xem chi tiết</Text>
+      </TouchableOpacity>
+      </View>
        
         <FlatList
           data={dataItems1 || []}
@@ -218,7 +229,10 @@ const GiftExchange=({navigation})=>{
           renderItem={({item, index}) => {
             return (
               <TouchableOpacity
-              onPress={() => navigation.navigate('GiftExchangeDetail')}
+              onPress={() => navigation.navigate('GiftExchangeDetail', {
+                idGift: item.Id
+              })}
+              
               style={{
                 shadowColor: '#000',
                 shadowOffset: {
@@ -237,13 +251,15 @@ const GiftExchange=({navigation})=>{
                 margin: 10,
               }}>
               <Image
-                source={images.imageSP1}
+                source={{ uri:item.Images}}
                 style={{
                   width: DEVICE_WIDTH / 2 - 45,
                   height: 120,
                   position: 'relative',
                   resizeMode: 'contain',
                   alignSelf: 'center',
+                  borderTopLeftRadius: 10,
+                  borderTopRightRadius: 10,
                 }}
               />
               <View
@@ -254,7 +270,7 @@ const GiftExchange=({navigation})=>{
                   marginVertical: 5,
                   height:55,
                 }}>
-                <Text style={{color: '#000', fontSize: 13,}}>ok con de</Text>
+                <Text style={{color: '#000', fontSize: 13,}}>{item.Name}</Text>
                 <Text style={{fontSize: 12,color: '#000',marginTop:3}}>Giá trị: {item.Price}</Text>
               </View>
 
@@ -302,7 +318,9 @@ const GiftExchange=({navigation})=>{
           renderItem={({item, index}) => {
             return (
               <TouchableOpacity
-              onPress={() => navigation.navigate('GiftExchangeDetail')}
+              onPress={() => navigation.navigate('GiftExchangeDetail', {
+                idGift: item.Id
+              })}
               style={{
                 shadowColor: '#000',
                 shadowOffset: {
@@ -321,13 +339,15 @@ const GiftExchange=({navigation})=>{
                 margin: 10,
               }}>
               <Image
-                source={images.imageSP1}
+                source={{uri: item.Images}}
                 style={{
                   width: DEVICE_WIDTH / 2 - 45,
                   height: 120,
                   position: 'relative',
                   resizeMode: 'contain',
                   alignSelf: 'center',
+                  borderTopLeftRadius: 10,
+                  borderTopRightRadius: 10,
                 }}
               />
               <View
@@ -338,7 +358,7 @@ const GiftExchange=({navigation})=>{
                   marginVertical: 5,
                   height:55,
                 }}>
-                <Text style={{color: '#000', fontSize: 13,}}>ok con de</Text>
+                <Text style={{color: '#000', fontSize: 13,}}>{item.Name}</Text>
                 <Text style={{fontSize: 12,color: '#000',marginTop:3}}>Giá trị: {item.Price}</Text>
               </View>
 
@@ -386,7 +406,9 @@ const GiftExchange=({navigation})=>{
           renderItem={({item, index}) => {
             return (
               <TouchableOpacity
-              onPress={() => navigation.navigate('GiftExchangeDetail')}
+              onPress={() => navigation.navigate('GiftExchangeDetail', {
+                idGift: item.Id
+              })}
               style={{
                 shadowColor: '#000',
                 shadowOffset: {
@@ -405,13 +427,15 @@ const GiftExchange=({navigation})=>{
                 margin: 10,
               }}>
               <Image
-                source={images.imageSP1}
+               source={{uri: item.Images}}
                 style={{
                   width: DEVICE_WIDTH / 2 - 45,
                   height: 120,
                   position: 'relative',
                   resizeMode: 'contain',
                   alignSelf: 'center',
+                  borderTopLeftRadius: 10,
+                  borderTopRightRadius: 10,
                 }}
               />
               <View
@@ -422,7 +446,7 @@ const GiftExchange=({navigation})=>{
                   marginVertical: 5,
                   height:55,
                 }}>
-                <Text style={{color: '#000', fontSize: 13,}}>ok con de</Text>
+                <Text style={{color: '#000', fontSize: 13,}}>{item.Name}</Text>
                 <Text style={{fontSize: 12,color: '#000',marginTop:3}}>Giá trị: {item.Price}</Text>
               </View>
 
@@ -458,7 +482,7 @@ const GiftExchange=({navigation})=>{
           }}></FlatList>
         </View>
       </ScrollView>
-      {renderProcess()}
+      {/* {renderProcess()} */}
     </View>
   );
 }

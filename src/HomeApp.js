@@ -30,8 +30,11 @@ function HomeStackScreen() {
 function CheckQRStackScreen() {
   return (
     <QRStack.Navigator>
+      {/* <QRStack.Screen name="CheckQR" component={CheckQR} options={{ headerShown:false }} /> */}
+      {/* <HomeStack.Screen name="CheckQRDetails" component={CheckQRDetails} options={{ headerShown:false }}  /> */}
+      <QRStack.Group screenOptions={{ presentation: 'modal' }}>
       <QRStack.Screen name="CheckQR" component={CheckQR} options={{ headerShown:false }} />
-      <HomeStack.Screen name="CheckQRDetails" component={CheckQRDetails} options={{ headerShown:false }}  />
+      </QRStack.Group>
     </QRStack.Navigator>
   );
 }
@@ -52,8 +55,8 @@ const HomeApp=({navigation})=>{
     screenOptions={{
       tabBarStyle: { height: 60, paddingBottom:8},
       tabBarLabelStyle: {
-        fontSize: 13,
-        fontWeight:'600'
+        fontSize: 11,
+        fontWeight:'400'
       },
       tabBarInactiveTintColor: "#CCCCCC",
       // tabBarActiveTintColor: "#f5610a",
@@ -84,7 +87,6 @@ const HomeApp=({navigation})=>{
       <Tab.Screen
         name="CheckQR"
         component={CheckQRStackScreen}
-        
         options={{
           headerShown: false ,
           tabBarLabel: '',

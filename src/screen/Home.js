@@ -1,14 +1,22 @@
-import React, {useState} from "react";
-import { View, StyleSheet,Text,Dimensions,TouchableOpacity,FlatList,Image, ScrollView,ImageBackground } from "react-native";
+import React, {useState,useEffect} from "react";
+import { View, StyleSheet,Text,Dimensions,TouchableOpacity,FlatList,Image, ScrollView,ImageBackground,Alert } from "react-native";
 import Feather from 'react-native-vector-icons/Feather';
 import FontAwesome from 'react-native-vector-icons/Foundation';
 import Swiper from 'react-native-swiper';
 import { COLORS, images } from '../components/constants';
 const DEVICE_WIDTH = Dimensions.get('window').width;
 const DEVICE_HEIGHT = Dimensions.get('window').height;
+import AppContent from '../appContent/AppContent'
+import * as AppApi from '../networking';
+import Loader from '../components/Loader';
+import Toast from 'react-native-simple-toast';
 
 const Home=({navigation})=>{  
-
+  const [dataInfo, setDataInfo] = useState({});
+  const [dataTitle, setDataTitle] = useState([]);
+  const [dataItems1, setDataItems1] = useState([]);
+  const [dataItems2, setDataItems2] = useState([]);
+  const [showProcess, setShowProcess] = useState(false);
   const menu = [
     {
       name: 'Giải trí',
@@ -42,43 +50,110 @@ const Home=({navigation})=>{
     },
   ];
 
- const data = [
-    {
-      name: 'Sũa bò NEW Anh em đã sẵn sàng ',
-      thoigian: '120,000',
-    },
-    {
-      name: 'Sữa chua',
-      thoigian: '120,000',
-    },
-    {
-      name: 'Vinamilk',
-      thoigian: '120,000',
-    },
-    {
-      name: 'Sũa hộp',
-      thoigian: '120,000',
-    },
-    {
-        name: 'Hoa quả',
-        thoigian: '120,000',
-    },
-  
-  ];
+
+  useEffect(() => {
+    
+    const willFocusSubscription = navigation.addListener('focus', () => {
+      getInfoHome()
+    });
+    return willFocusSubscription;
+
+  }, [navigation]);
+
+  const getTitleList = () => {
+    var urlList = AppContent.URL_Title_Items
+    var URL = AppContent.BASE_URL + urlList
+      AppApi.RequestGET(URL, AppContent.Token, (err, json) => {
+        if(!err){
+            if(json.status == 1){
+              var data = json.ListCategory
+             setDataTitle(data)  
+             getListItems1(data)
+            }else{
+              setShowProcess(false)
+              Alert.alert('Thông báo', String(json.Mess))
+            }
+        }else{
+           setShowProcess(false)
+            Alert.alert('Mất kết nối', 'Không thể kết nối được tới sever')
+        }
+    })
+  }
+
+  const getListItems1 = (data2) => {
+    var urlList = AppContent.URL_List_Items + 'cateId=' + String(data2[0].Id) + '&top=4'
+    var URL = AppContent.BASE_URL + urlList
+      AppApi.RequestGET(URL, AppContent.Token, (err, json) => {
+        if(!err){
+            if(json.status == 1){
+              setDataItems1(json.ListGift)
+              getListItems2(data2)
+            }else{
+              setShowProcess(false)
+              Toast.show(String(json.Mess), Toast.LONG);
+            }
+        }else{
+           setShowProcess(false)
+            Alert.alert('Mất kết nối', 'Không thể kết nối được tới sever')
+        }
+    })
+  }
+
+  const getListItems2 = (data3) => {
+    var urlList = AppContent.URL_List_Items + 'cateId=' + String(data3[1].Id) + '&top=4'
+    var URL = AppContent.BASE_URL + urlList
+      AppApi.RequestGET(URL, AppContent.Token, (err, json) => {
+        if(!err){
+            if(json.status == 1){
+              setDataItems2(json.ListGift)
+              setShowProcess(false)
+            }else{
+              setShowProcess(false)
+              Toast.show(String(json.Mess), Toast.LONG);
+            }
+        }else{
+           setShowProcess(false)
+            Alert.alert('Mất kết nối', 'Không thể kết nối được tới sever')
+        }
+    })
+  }
+
+  const getInfoHome = () => {
+    setShowProcess(true)
+    console.log("IDDDTaiKhoan",AppContent.UserLoin.Id)
+    var urlList = AppContent.URL_INFO_Home + 'userId=' + String(AppContent.UserLoin.Id)
+    var URL = AppContent.BASE_URL + urlList
+      AppApi.RequestGET(URL, AppContent.Token, (err, json) => {
+        if(!err){
+            if(json.status == 1){
+              getTitleList();
+              setDataInfo(json.CustomerInfo)
+            }else{
+              setShowProcess(false)
+              Toast.show(String(json.Mess), Toast.LONG);
+            }
+        }else{
+           setShowProcess(false)
+            Alert.alert('Mất kết nối', 'Không thể kết nối được tới sever')
+        }
+    })
+  }
+
 
   return (
     <ImageBackground 
-    
     source={images.BGHome} 
     style={{flex: 1,backgroundColor:'#ffff'}}>
+    <Loader visible={showProcess}></Loader>
       <ScrollView>
-        
         <View style={{flexDirection: 'row'}}>
           <View style={styles.logoView} >
                 <Image source={images.logoHome} style={styles.logo} />
           </View>
 
-          <TouchableOpacity style={{ marginLeft:10, marginTop:30, flex:1}}  onPress={() => {}}>
+          <TouchableOpacity style={{ marginLeft:10, marginTop:30, flex:1}}   onPress={() => {
+                  navigation.navigate('Notification')
+                }}>
           <Feather name="bell" color="#ffff" size={27} />
           </TouchableOpacity>
         </View>
@@ -95,7 +170,7 @@ const Home=({navigation})=>{
 
               <View style={{flex: 3, flexDirection: 'column'}}>
                 <Text style={{marginTop:10,marginLeft:20,fontSize:15,color:'#000000'}}>Chào mừng</Text>
-                <Text style={{marginTop:8,marginLeft:20,fontSize:18,fontWeight:'700',color:COLORS.textCOLORS}}>Trường tô</Text>
+                <Text style={{marginTop:8,marginLeft:20,fontSize:18,fontWeight:'700',color:COLORS.textCOLORS}}>{dataInfo.FullName == '' ? dataInfo.Phone : dataInfo.FullName}</Text>
               </View>
 
               <TouchableOpacity
@@ -153,7 +228,7 @@ const Home=({navigation})=>{
                       flexDirection: 'row',
                     }}>
                     <Text style={{ color: '#336699',fontSize:26, fontWeight:'800'}}>
-                    0
+                    {dataInfo.AccumulatedPoint}
                     </Text>
                   </View>
 
@@ -216,7 +291,8 @@ const Home=({navigation})=>{
 
               <TouchableOpacity
                 onPress={() => {
-                  console.log('ok');
+                  navigation.navigate('MyGift')
+                  setShowProcess(false)
                 }}
                 style={styles.categoryBtn}>
                  <Image
@@ -326,12 +402,14 @@ const Home=({navigation})=>{
 
         <FlatList
           style={{flex: 1}}
-          data={data || []}
+          data={dataItems1 || []}
           horizontal
           renderItem={({item, index}) => {
             return (
               <TouchableOpacity
-              onPress={() => navigation.navigate('GiftExchangeDetail')}
+              onPress={() => navigation.navigate('GiftExchangeDetail', {
+                idGift: item.Id
+              })}
               style={{
                 shadowColor: '#000',
                 shadowOffset: {
@@ -350,14 +428,15 @@ const Home=({navigation})=>{
                 margin: 10,
               }}>
               <Image
-                source={images.imageSP1}
+                source={{ uri:item.Images}}
                 style={{
                   width: DEVICE_WIDTH / 2 - 45,
                   height: 120,
                   position: 'relative',
                   resizeMode: 'contain',
                   alignSelf: 'center',
-               
+                  borderTopLeftRadius: 10,
+                  borderTopRightRadius: 10,
                 }}
               />
               <View
@@ -368,8 +447,8 @@ const Home=({navigation})=>{
                   marginVertical: 5,
                   height:55,
                 }}>
-                <Text style={{color: '#000', fontSize: 13,}}>{item.name}</Text>
-                <Text style={{fontSize: 12,color: '#000',marginTop:3}}>Giá trị: {item.thoigian}</Text>
+                <Text style={{color: '#000', fontSize: 13,}}>{item.Name}</Text>
+                <Text style={{fontSize: 12,color: '#000',marginTop:3}}>Giá trị: {item.Price}</Text>
               </View>
 
               <View
@@ -384,8 +463,8 @@ const Home=({navigation})=>{
 
                 <View style={{width: '40%', flexDirection: 'row',alignItems: 'center',}}>
                   <Text style={{fontSize: 11,fontWeight: 'bold',}}>Xu:</Text>
-                  <Text style={{fontSize: 14,fontWeight: '800',marginLeft:3,color: COLORS.textCOLORS}}>20</Text>
-                  <Image source={images.coin} style={{ width: 20, height: 20, marginLeft:2}}></Image>
+                  <Text style={{fontSize: 14,fontWeight: '800',marginLeft:3,color: COLORS.textCOLORS}}>{item.Point}</Text>
+                  <Image source={images.coin} style={{ width: 20, height: 20, marginLeft:5}}></Image>
                 </View>
                 <View
                   style={{
@@ -415,12 +494,14 @@ const Home=({navigation})=>{
 
         <FlatList
           style={{flex: 1, marginTop: 10}}
-          data={data || []}
+          data={dataItems2 || []}
           horizontal
           renderItem={({item, index}) => {
             return (
               <TouchableOpacity
-              onPress={() => navigation.navigate('GiftExchangeDetail')}
+              onPress={() => navigation.navigate('GiftExchangeDetail', {
+                idGift: item.Id
+              })}
               style={{
                 shadowColor: '#000',
                 shadowOffset: {
@@ -439,14 +520,15 @@ const Home=({navigation})=>{
                 margin: 10,
               }}>
               <Image
-                source={images.imageSP2}
+                source={{ uri:item.Images}}
                 style={{
                   width: DEVICE_WIDTH / 2 - 45,
                   height: 120,
                   position: 'relative',
                   resizeMode: 'contain',
                   alignSelf: 'center',
-               
+                  borderTopLeftRadius: 10,
+                  borderTopRightRadius: 10,
                 }}
               />
               <View
@@ -457,8 +539,8 @@ const Home=({navigation})=>{
                   marginVertical: 5,
                   height:55,
                 }}>
-                <Text style={{color: '#000', fontSize: 13,}}>{item.name}</Text>
-                <Text style={{fontSize: 12,color: '#000',marginTop:3}}>Giá trị: {item.thoigian}</Text>
+                <Text style={{color: '#000', fontSize: 13,}}>{item.Name}</Text>
+                <Text style={{fontSize: 12,color: '#000',marginTop:3}}>Giá trị: {item.Price}</Text>
               </View>
 
               <View
@@ -473,8 +555,8 @@ const Home=({navigation})=>{
 
                 <View style={{width: '40%', flexDirection: 'row',alignItems: 'center',}}>
                   <Text style={{fontSize: 11,fontWeight: 'bold',}}>Xu:</Text>
-                  <Text style={{fontSize: 14,fontWeight: '800',marginLeft:3,color: COLORS.textCOLORS}}>20</Text>
-                  <Image source={images.coin} style={{ width: 20, height: 20, marginLeft:2}}></Image>
+                  <Text style={{fontSize: 14,fontWeight: '800',marginLeft:3,color: COLORS.textCOLORS}}>{item.Point}</Text>
+                  <Image source={images.coin} style={{ width: 20, height: 20, marginLeft:5}}></Image>
                 </View>
                 <View
                   style={{

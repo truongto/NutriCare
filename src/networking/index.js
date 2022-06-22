@@ -75,32 +75,33 @@ const RequestGET = async (url, token, callback) => {
 };
 
 
-// function RequestPOST(url, params, token, callback) {
-//     console.log("url: ",url);
-//     console.log("params: ", params)
-//     console.log("Token: ", token);
-//     fetch(url, {
-//         method: 'POST',
-//         headers: {
-//             'Accept': 'application/json',
-//             'Content-Type': 'application/json',
-//         },
-//         timeout: 30000,
-//         body: JSON.stringify(params)
-//     })
-//         .then((response) => response.json())
-//         .then((responseJson) => {
-//             console.log("response: ", responseJson)
+const RequestPOST = async (url, paramsBody, token, callback) => {
+    console.log("url: ",url);
+    console.log("params: ", paramsBody)
+    console.log("Token: ", token);
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Key': token,
+        },
+        timeout: 30000,
+        body: JSON.stringify(paramsBody)
+    })
+        .then((response) => response.json())
+        .then((responseJson) => {
+            console.log("response: ", responseJson)
 
-//             callback(null, responseJson);
-//         })
-//         .catch((error) => {
-//             callback(error, null);
-//         })
-//         .finally();
+            callback(null, responseJson);
+        })
+        .catch((error) => {
+            callback(error, null);
+        })
+        .finally();
 
-// };
+};
 
 
 
-export { RequestGET}
+export {RequestGET, RequestPOST}

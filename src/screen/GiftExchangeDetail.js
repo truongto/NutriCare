@@ -1,16 +1,68 @@
-import React, {useState} from "react";
-import { View, StyleSheet,Text,ScrollView,Dimensions,Image,TouchableOpacity,Alert} from "react-native";
+import React, {useState,useEffect} from "react";
+import { View, StyleSheet,Text,ScrollView,Dimensions,Image,TouchableOpacity,Alert,ActivityIndicator} from "react-native";
 import CustomTextDetail from '../../src/components/custom/CustomTextDetail';
 import { COLORS, images} from '../components/constants';
 const DEVICE_WIDTH = Dimensions.get('window').width;
 const DEVICE_HEIGHT = Dimensions.get('window').height;
 import Feather from 'react-native-vector-icons/Feather';
 import { Colors } from "react-native/Libraries/NewAppScreen";
+import * as AppApi from '../networking';
+import AppContent from '../appContent/AppContent'
+import { WebView } from 'react-native-webview';
+import AutoHeightWebView from "react-native-autoheight-webview";
+import Loader from '../components/Loader';
+import PoupGiftExchangeFailed from '../components/PoupGiftExchangeFailed';
+import PoupGiftExchangeOK from '../components/PoupGiftExchangeOK';
 
-const GiftExchangeDetail=({navigation})=>{  
+const GiftExchangeDetail=({route,navigation})=>{  
+  const {idGift} = route.params;
+  const [showProcess, setShowProcess] = useState(false);
+  const [ten, setTen] = useState('');
+  const [xu, setXu] = useState(0);
+  const [gia, setGia] = useState(0);
+  const [description, setDescription] = useState('');
+  const [linkImage, setLinkImage] = useState('');
+  const [showPopUpFailed, setShowPopUpFailed] = useState(false);
+  const [showPopUpOK, setShowPopUpOK] = useState(false);
+
+
+  useEffect(() => {
+    const willFocusSubscription = navigation.addListener('focus', () => {
+      getGiftDetails();
+    });
+    return willFocusSubscription;
+
+  }, [navigation]);
+
+  const getGiftDetails = () => {
+    setShowProcess(true)
+    var urlList = AppContent.URL_Detail_Gift + 'id=' + String(idGift)
+    var URL = AppContent.BASE_URL + urlList
+      AppApi.RequestGET(URL, AppContent.Token, (err, json) => {
+        if(!err){
+            if(json.status == 1){
+              setTen(json.GiftInfo.Name)
+              setXu(json.GiftInfo.Point)
+              setGia(json.GiftInfo.Price)
+              setDescription(json.GiftInfo.Description)
+              setLinkImage(json.GiftInfo.Images)
+              setShowProcess(false)
+            }else{
+              setShowProcess(false)
+              Alert.alert('Thông báo', String(json.Mess))
+            }
+        }else{
+           setShowProcess(false)
+            Alert.alert('Mất kết nối', 'Không thể kết nối được tới sever')
+        }
+    })
+  }
+
+ 
+
   return (
     <View style={{flex: 1, backgroundColor: '#ffff'}}>
-  
+     <Loader visible={showProcess}></Loader>
       <ScrollView style={{marginBottom:10}}>
        <View style={{
             width: DEVICE_WIDTH,
@@ -25,27 +77,27 @@ const GiftExchangeDetail=({navigation})=>{
               resizeMode: 'contain',
               alignSelf: 'center',
             }}
-            source={images.imageKM4}
+            source={{uri: linkImage}}
           />
           <TouchableOpacity style={{marginLeft: 20,marginTop:25}} onPress={() => navigation.goBack()}>
-          <Feather name="arrow-left" color="#ffff" size={25} />
+          <Feather name="arrow-left" color="#DDDDDD" size={25} />
           </TouchableOpacity>
        </View>
 
-        <Text style={{marginLeft: 15,marginTop:10,color: COLORS.textCOLORS , fontSize:16, fontWeight:'600'}} >Sũa bò NEW Anh em đã sẵn sàng</Text>
+        <Text style={{marginLeft: 15,marginTop:10,color: COLORS.textCOLORS , fontSize:16, fontWeight:'600'}} >{ten}</Text>
 
         <View style={{flexDirection:'row',marginTop:10, marginLeft: 15,}} >
           <View style={{flexDirection:'column',flex:1}}>
             <Text>Xu</Text>
             <View style={{flexDirection:'row'}}> 
-            <Text style={{fontWeight:'600',marginTop:8}}>23</Text>
+            <Text style={{fontWeight:'600',marginTop:8}}>{xu}</Text>
             <Image source={images.coin} style={{ width:20, height: 20, marginLeft:4, marginTop:6}}></Image>
           </View>
             
           </View>
           <View style={{flexDirection:'column',flex:3,}}>
             <Text>Giá trị</Text>
-            <Text style={{fontWeight:'600',marginTop:8}}>23,000,000</Text>
+            <Text style={{fontWeight:'600',marginTop:8}}>{gia}</Text>
           </View>
           <View style={{flexDirection:'column',flex:1}}>
             <Text>Còn hàng</Text>
@@ -73,8 +125,15 @@ const GiftExchangeDetail=({navigation})=>{
                   },
                 ]}></View>
         </View>
-        <Text style={{fontSize:13,marginTop:10, marginLeft: 15, marginRight: 15}}>Hoàng Đức luôn biết tìm “những khe rất nhỏ” để tìm đồng đội
-           - Tạ Biên Cương Bất ngờ : Ukraine khóa van khí đốt Nga – châu Âu</Text>
+        {/* <Text style={{fontSize:13,marginTop:10, marginLeft: 15, marginRight: 15}}>Hoàng Đức luôn biết tìm “những khe rất nhỏ” để tìm đồng đội
+           - Tạ Biên Cương Bất ngờ : Ukraine khóa van khí đốt Nga – châu Âu</Text> */}
+
+          <AutoHeightWebView style={{marginTop:10, marginLeft: 10,width: DEVICE_WIDTH - 20,marginRight: 10}}
+            originWhitelist={['*']}
+            source={{ html: description}}
+            scalesPageToFit={false}
+            containerStyle={{width: DEVICE_WIDTH -20, flex: 1}}
+          ></AutoHeightWebView>
         <Text style={{fontSize:13,marginTop:20, marginLeft: 15}}>Thông tin chi tiết:</Text>
         <Text style={{fontSize:13, marginLeft: 15,color:'#33CCFF',textDecorationLine:'underline'}}>link san pham </Text>
 
@@ -96,7 +155,7 @@ const GiftExchangeDetail=({navigation})=>{
                     },
                     {
                         text: 'Đồng ý',
-                        onPress: () => {},
+                        onPress: () => {setShowPopUpFailed(true)},
                     },
                 ],
                 { cancelable: false },
@@ -106,6 +165,21 @@ const GiftExchangeDetail=({navigation})=>{
             }>
           <Text style={styles.loginButtonText}>Đổi quà</Text>
         </TouchableOpacity>
+
+
+        <PoupGiftExchangeFailed
+          visibles={showPopUpFailed}
+          onPressCalback={() => {
+            setShowPopUpFailed(false)
+          }}
+        />
+
+        <PoupGiftExchangeOK
+          visibles={showPopUpOK}
+          onPressCalback={() => {
+            setShowPopUpOK(true)
+          }}
+        />
 
     </View>
   );

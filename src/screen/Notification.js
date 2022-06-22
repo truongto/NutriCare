@@ -3,6 +3,7 @@ import { View, StyleSheet,Text,Image,FlatList } from "react-native";
 import { COLORS, images } from '../components/constants';
 
 const Notification=({navigation})=>{  
+
   const data = [
     {
       name: 'Sũa bò',

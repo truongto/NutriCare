@@ -28,6 +28,10 @@ export const khaosat = require("../../../assets/icons-khaosat.png");
 export const muasam = require("../../../assets/icons-muasam.png");
 
 export const logoHome = require("../../../assets/logo_trang.png");
+export const memberBG = require("../../../assets/memberBG.png");
+export const logoV2 = require("../../../assets/logoDoc.png");
+export const noImage = require("../../../assets/no-image.png");
+
 export default {
     anhtest,
     imageKM1,
@@ -49,5 +53,8 @@ export default {
     quacuatoi,
     doiqua,
     doimuong,
-    camnang,chiase,cuahang,giaitri,khaosat,muasam,logoHome
+    camnang,chiase,cuahang,giaitri,khaosat,muasam,logoHome,
+    memberBG,
+    logoV2,
+    noImage
 }

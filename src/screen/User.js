@@ -1,24 +1,26 @@
 import React, {useState} from "react";
-import { View, StyleSheet,Text,SafeAreaView,ScrollView,Image,Dimensions,TouchableOpacity } from "react-native";
+import { View, StyleSheet,Text,SafeAreaView,ScrollView,Image,Dimensions,TouchableOpacity,Alert } from "react-native";
 import { Avatar, Icon, Button } from 'react-native-elements';
 import { COLORS, images } from '../components/constants';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import Feather from 'react-native-vector-icons/Feather';
 const DEVICE_WIDTH = Dimensions.get('window').width;
 const User=({navigation})=>{  
   return(
-    <View style={{flex: 1, backgroundColor: '#ffff'}}>
+    <View style={{flex: 1, backgroundColor: '#03a9f408'}}>
     <View style={styles.toolBar}>
       <Text style={styles.textToolbar}>Trang cá nhân</Text>
     </View>
     <ScrollView>
-    <SafeAreaView style={styles.container}>
+    {/* <SafeAreaView style={styles.container}> */}
+
         <View style={styles.userInfoSectionv2}>
-            <View style={{ flexDirection: 'row', marginTop: 20 }}>
+            <View style={{ flexDirection: 'row', marginTop: 10 }}>
                 <Avatar
                     activeOpacity={0.2}
-                    containerStyle={{ backgroundColor: '#0061a8' }}
+                    containerStyle={{ backgroundColor: '#33CCFF' }}
                     rounded
-                    size="large"
+                    size="medium"
                     title={'T'}
                 />
 
@@ -27,7 +29,7 @@ const User=({navigation})=>{
                         style={[
                             styles.title,
                             {
-                                marginTop: 10,
+                                marginTop:5,
                                 marginBottom: 5,
                             },
                         ]}>
@@ -35,20 +37,123 @@ const User=({navigation})=>{
                     </Text>
 
                     <View style={styles.row}>
-                        {/* <Icon
-                            type="Ionicons"
-                            name="call"
-                            style={{ fontSize: 20, color: '#777777' }}
-                        /> */}
+                        
                         <Text style={styles.caption}>totruong52@gmail.com</Text>
                     </View>
 
                 </View>
+
             </View>
-        </View>
+         </View>
 
 
+         <View style={{backgroundColor: '#fff',height:180,marginTop:10,justifyContent:'center'}}>
+           
+           <View style={{flexDirection:'row',alignItems:'center',marginBottom:6,marginLeft:20}}>
+             <Image source={images.quacuatoi} style={styles.categoryIcon}></Image>
+             <Text style={{fontSize:15,color:'#000',flex:5,marginLeft:10}}>
+               Xu tích lũy
+             </Text>
+             
+             <Feather name="chevron-right" color="#C0C0C0" size={24} style={{flex:1}} />
+           </View>
 
+           <View style={{backgroundColor:'#C0C0C0',height:1,width:'100%'}}></View>
+
+           <View style={{flexDirection:'row',alignItems:'center',marginTop:6,marginLeft:20,marginBottom:6,}}>
+             <Image source={images.doiqua} style={styles.categoryIcon}></Image>
+             <Text style={{fontSize:15,color:'#000',flex:5,marginLeft:10}}>
+               Địa chỉ của tôi
+             </Text>
+             
+             <Feather name="chevron-right" color="#C0C0C0" size={24} style={{flex:1}} />
+           </View>
+
+           <View style={{backgroundColor:'#C0C0C0',height:1,width:'100%'}}></View>
+
+           <View style={{flexDirection:'row',alignItems:'center',marginTop:6,marginLeft:20}}>
+             <Image source={images.doiqua} style={styles.categoryIcon}></Image>
+             <Text style={{fontSize:15,color:'#000',flex:5,marginLeft:10}}>
+               Bốc thăm trúng thưởng
+             </Text>
+             
+             <Feather name="chevron-right" color="#C0C0C0" size={24} style={{flex:1}} />
+           </View>
+       </View>
+
+
+       <View style={{backgroundColor: '#fff',height:180,marginTop:13,justifyContent:'center'}}>
+           
+           <View style={{flexDirection:'row',alignItems:'center',marginBottom:6,marginLeft:20}}>
+             <Image source={images.quacuatoi} style={styles.categoryIcon}></Image>
+             <Text style={{fontSize:15,color:'#000',flex:5,marginLeft:10}}>
+               Chính sách thành viên
+             </Text>
+             
+             <Feather name="chevron-right" color="#C0C0C0" size={24} style={{flex:1}} />
+           </View>
+
+           <View style={{backgroundColor:'#C0C0C0',height:1,width:'100%'}}></View>
+
+           <View style={{flexDirection:'row',alignItems:'center',marginTop:6,marginLeft:20,marginBottom:6,}}>
+             <Image source={images.doiqua} style={styles.categoryIcon}></Image>
+             <Text style={{fontSize:15,color:'#000',flex:5,marginLeft:10}}>
+               Điều khoản sử dụng
+             </Text>
+             
+             <Feather name="chevron-right" color="#C0C0C0" size={24} style={{flex:1}} />
+           </View>
+
+           <View style={{backgroundColor:'#C0C0C0',height:1,width:'100%'}}></View>
+
+           <View style={{flexDirection:'row',alignItems:'center',marginTop:6,marginLeft:20}}>
+             <Image source={images.doiqua} style={styles.categoryIcon}></Image>
+             <Text style={{fontSize:15,color:'#000',flex:5,marginLeft:10}}>
+               Câu hỏi thường gặp
+             </Text>
+             
+             <Feather name="chevron-right" color="#C0C0C0" size={24} style={{flex:1}} />
+           </View>
+       </View>
+
+
+       <View style={{backgroundColor: '#fff',height:60,marginTop:13,justifyContent:'center'}}>
+           
+           <View style={{flexDirection:'row',alignItems:'center',marginBottom:6,marginLeft:20}}>
+             <Image source={images.quacuatoi} style={styles.categoryIcon}></Image>
+             <Text style={{fontSize:15,color:'#000',flex:5,marginLeft:10}}>
+               Liên hệ ngay với NutriCare
+             </Text>
+             
+             <Feather name="chevron-right" color="#C0C0C0" size={24} style={{flex:1}} />
+           </View>
+
+       </View>
+       <TouchableOpacity style={styles.loginButtonV2} onPress={() => {
+          Alert.alert(
+            'Thông báo',
+            'Bạn có chắc chắn muốn đăng xuất',
+            [
+                {
+                    text: 'Không',
+                    onPress: () => {
+                    },
+                    style: 'cancel',
+                },
+                {
+                    text: 'Đồng ý', 
+                    onPress: () => {
+                      navigation.navigate('Login')
+                    },
+                },
+            ],
+            { cancelable: false }
+          ); 
+       }}>
+          <Text style={styles.loginButtonTextV2}>ĐĂNG XUẤT</Text>
+        </TouchableOpacity>
+
+{/* 
           <View style={styles.infoBoxWrapper}>
               <View style={styles.menuWrapper}>
                     <TouchableOpacity
@@ -141,11 +246,11 @@ const User=({navigation})=>{
                         </View>
                     </TouchableOpacity>
               </View>
-          </View>
+          </View> */}
 
-    </SafeAreaView>
-</ScrollView>
-</View>
+    {/* </SafeAreaView> */}
+  </ScrollView>
+ </View>
   )
 }
 
@@ -175,6 +280,10 @@ textToolbar: {
 userInfoSectionv2: {
     paddingHorizontal: 20,
     marginBottom: 15,
+    paddingBottom:10,
+    backgroundColor:'#fff',
+    marginTop:20,
+    alignContent:'center'
 },
 userInfoSection: {
     paddingHorizontal: 30,
@@ -182,13 +291,12 @@ userInfoSection: {
     marginLeft: 20,
 },
 title: {
-    fontSize: 24,
-    fontWeight: 'bold',
+    fontSize: 16,
+    fontWeight: '600',
 },
 caption: {
-    fontSize: 16,
-    marginLeft: 10,
-    fontWeight: '500',
+    fontSize: 15,
+    fontWeight: '400',
     justifyContent: 'center',
 },
 row: {
@@ -261,5 +369,31 @@ link: {
     justifyContent: 'center'
 
 },
+
+
+
+categoryIcon: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignSelf: 'center',
+    width: 45,
+    height: 45,
+  },
+  loginButtonV2: {
+    backgroundColor: 'transparent',
+    paddingVertical: 8,
+    marginLeft:40,
+    marginRight:40,
+    marginBottom:20,
+    marginTop:20
+  },
  
+  loginButtonTextV2: {
+    color: COLORS.button,
+    alignSelf: 'center',
+    fontWeight: '700',
+    fontSize: 17,
+    marginLeft:10
+  },
+
 });
